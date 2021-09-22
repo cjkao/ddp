@@ -8,8 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"golang.org/x/net/websocket"
 	"errors"
+
+	"golang.org/x/net/websocket"
 )
 
 const (
@@ -56,6 +57,7 @@ type Client struct {
 	// readStats controls statistics gathering for overall client reads.
 	readStats *ReaderStats
 	// readLog control logging for clietn reads.
+	// a proxy of websocket for readStat
 	readLog *ReaderLogger
 	// reconnects in the number of reconnections the client has made
 	reconnects int64
@@ -146,6 +148,7 @@ func NewClient(url, origin string) *Client {
 
 		idManager: *newidManager(),
 	}
+	//all encoded object into writer
 	c.encoder = json.NewEncoder(c.writeStats)
 	c.SetSocketLogActive(false)
 
@@ -444,6 +447,8 @@ func (c *Client) CollectionStats() []CollectionStats {
 }
 
 // start starts a new client connection on the provided websocket
+//readLog is reader of websocket
+//readLog
 func (c *Client) start(ws *websocket.Conn, connect *Connect) {
 
 	c.status(CONNECTING)

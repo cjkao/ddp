@@ -74,7 +74,7 @@ func (c *KeyCache) changed(msg Update) {
 			c.notify("update", id, item)
 		} else { //change without record
 			c.items[id] = fields
-			c.notify("update", id, item)
+			c.notify("update", id, fields)
 		}
 	}
 }
