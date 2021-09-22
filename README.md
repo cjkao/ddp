@@ -1,27 +1,5 @@
-# ddp
+# DDP in Go
 
-MeteorJS DDP library for Golang
+[Meteor](https://meteor.com) DDP library for Go. This library allows Go applications to connect to Meteor applications, subscribe to Meteor publications, read from a cached Collection (similar to minimongo), and call Meteor methods on the server.
 
-
-websocket a io.reader and io.writer 
-
-
-writeSocketStat (state, WriterProxy) 
-                           -->  writeLog (Log, WriterProxy)
-			                       --> WebSocket
-
----------------
-WriterStats is a stateTracker + WriterProxy(writeSocketState)
-writeSocketStat is a StateTracker + WriterProxy(writeLog), track current socket
-writerLog is a Log + WriterProxy(io.Writer)
-WriterProxy is a io.Writer of websocket
-
-stateTracker is a mutex + some ints, and implement snapshot to state, 
-
-encoder ==>
-   json.Encoder of writeStat
-
-when Encoder encode object, it write to WebSocket
-
-
-WriterStats and WriterLog both implement io.writer interfce
+See `ddp/_examples` for some tips and an example app that walks through all the features of the library.
